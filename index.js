@@ -1,21 +1,39 @@
 const inquirer = require('inquirer');
 
+inquirer.registerPrompt('recursive', require('inquirer-recursive'));
 inquirer
   .prompt([
     {
-      type: 'input',
-      message: 'What is your user name?',
-      name: 'username',
-    },
-    {
-      type: 'password',
-      message: 'What is your password?',
-      name: 'password',
-    },
-    {
-      type: 'password',
-      message: 'Re-enter password to confirm:',
-      name: 'confirm',
+      type: 'recursive',
+      message: 'Add a new user?',
+      name: 'users',
+      prompts: [
+        {
+          type: 'input',
+          message: "'What is the employee's name?",
+          name: 'name', 
+        },
+        {
+          type: 'list',
+          message: "'What is the employee's position?'",
+          name: 'position',
+          choices: ['Manager', 'Engineer', 'Intern',]
+        },
+        {
+          type: 'input',
+          message: "'What is the employee's id'",
+          name: 'id', 
+        },
+        {
+          type: 'input',
+          message: "'What is the employee's email?'",
+          name: 'email',
+        },
+        {
+          type: 'input',
+          message: "'What is the employee's Github username?'",
+          name: 'github',
+        }]
     },
   ])
   .then((response) =>
