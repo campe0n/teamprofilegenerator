@@ -41,19 +41,29 @@ const getInfo = () => {
 const handler = (answers) => {
     if (answers.list === 'Engineer') {
       position = "Engineer's"
-      const engineer = new Engineer()
+      var engineer = new Engineer(answers.name, answers.id, answers.email);
       getInfo();
-      console.log(engineer)
+      const promise = new Promise((resolve, reject) => {
+        setTimeout(() => {
+          resolve('foo');
+        }, 300);
+      });
+      promise
+      .then(getInfo())
+      engineer.getGithub();
     } else if (answers.list === 'Intern') {
       position = "Intern's"
-      const intern = new Intern()
+      var intern = new Intern()
       getInfo();
+    } else {
+      console.log('done with team')
+      console.log(engineer)
       console.log(intern)
-    } else (console.log('done with team'))
+    }
 }
 
 const init = () => {
-    getInfo()
+  getInfo()
 }
 
 init()
