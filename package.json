@@ -8,7 +8,7 @@
     "test": "tests"
   },
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "jest"
   },
   "repository": {
     "type": "git",
@@ -24,7 +24,9 @@
   "dependencies": {
     "inquirer": "^8.0.0",
     "inquirer-recursive": "0.0.7",
-    "jest": "^26.6.3",
     "recursion": "0.0.1"
+  },
+  "devDependencies": {
+    "jest": "^26.6.3"
   }
 }

@@ -1,8 +1,9 @@
-const Employee = require('./lib/employee')
 const Engineer = require('./lib/engineer')
 const Intern = require('./lib/intern')
 const Manager = require('./lib/manager');
+
 const inquirer = require('inquirer');
+const fs = require('fs')
 
 var employees = [];
 
@@ -115,36 +116,59 @@ function handler() {
 }
 
 function generateCards() {
-  writeToFile("./dist/index.html", generateHTML(employees));
+  writeToFile("index.html", generateHTML(employees));
 }
 
-function writeToFile(filename, data) {
-  false.writeFile(filename, data, (err) =>
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, (err) =>
   err ? console.log(err) : console.log("commit logged"))
   console.log(employees)
 }
 
 function generateHTML(employees) {
-  `<!DOCTYPE html>
+  return `<!DOCTYPE html>
   <html lang="en">
   <head>
       <meta charset="UTF-8">
       <meta http-equiv="X-UA-Compatible" content="IE=edge">
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
-      <title>Document</title>
+      <title>Team Generator</title>
+      <style>
+      body {margin: 0;}
+      header {background-color: #E84756; width: 100%; height: 15%;}
+      h1 {color: white; font-size: 40px; text-align: center; padding-top: 2.5%;}
+      </style>
   </head>
   <body>
-      
+      <header> 
+        <h1>My team</h1>
+      </header>
+      <main> 
+      ${generateCards(employees)} 
+      </main>
   </body>
   </html>`
 }
 
-
-
-
-
-const init = () => {
-  getManager()
+function generateCards(employees){
+  return employees
+    .map((data) => {
+      if (data.getRole() === "Manager") {
+        return `
+        <div class="card-deck">
+          <div class="card">
+          <img class="card-img-top" src="..." alt="Card image cap">
+            <div class="card-body">
+              <h5 class="card-title">${data.name}</h5>
+              <p class ="card-title">
+              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
+            </div>
+          <div class="card-footer">
+          <small class="text-muted">Last updated 3 mins ago</small>
+          </div>
+        </div>`
+      }
+    });
 }
 
-init()
+getManager();
