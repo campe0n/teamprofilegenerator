@@ -3,7 +3,7 @@ const Intern = require('./lib/intern')
 const Manager = require('./lib/manager');
 
 const inquirer = require('inquirer');
-const fs = require('fs')
+const fs = require('fs');
 
 var employees = [];
 
@@ -32,7 +32,6 @@ function getManager() {
       inquirer.prompt(managerq).then((data) => {
         var manager = new Manager(data.name, data.id, data.email, data.officeNo)
         employees.push(manager)
-        console.log(employees)
         handler();
       })
   }
@@ -119,8 +118,8 @@ function generateCards() {
   writeToFile("index.html", generateHTML(employees));
 }
 
-function writeToFile(fileName, data) {
-  fs.writeFile(fileName, data, (err) =>
+function writeToFile(filename, data) {
+  fs.writeFile(filename, data, (err) =>
   err ? console.log(err) : console.log("commit logged"))
   console.log(employees)
 }
@@ -134,39 +133,69 @@ function generateHTML(employees) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0">
       <title>Team Generator</title>
       <style>
-      body {margin: 0;}
       header {background-color: #E84756; width: 100%; height: 15%;}
-      h1 {color: white; font-size: 40px; text-align: center; padding-top: 2.5%;}
+      h1 {color: white; font-size: 40px; text-align: center;}
       </style>
   </head>
   <body>
       <header> 
         <h1>My team</h1>
       </header>
-      <main> 
-      ${generateCards(employees)} 
+      <main style="display: flex; height: 85%; width: 100%;>
+        <div class="deck" style="display:flex; justify-content: flex-start; align-items: flex-start; width: 100%; height: 85%;">
+          ${generateCard(employees)}
+        </div>
       </main>
   </body>
   </html>`
 }
 
-function generateCards(employees){
-  return employees
-    .map((data) => {
+function generateCard(employees){
+  return employees.map((data) => {
       if (data.getRole() === "Manager") {
         return `
-        <div class="card-deck">
-          <div class="card">
-          <img class="card-img-top" src="..." alt="Card image cap">
+          <div class="card" style="width: 200px; height: 200px; border-style: solid; border-radius: 2%; margin: 5%;">
             <div class="card-body">
-              <h5 class="card-title">${data.name}</h5>
-              <p class ="card-title">
-              <p class="card-text">This is a wider card with supporting text below as a natural lead-in to additional content. This content is a little bit longer.</p>
-            </div>
-          <div class="card-footer">
-          <small class="text-muted">Last updated 3 mins ago</small>
+              <div class="cheader" style="background-color:blue; width: 200px; height: 30%;">
+                <h5 style="color:white; text-align: center; font-size: 35px; margin: 0; padding: 0;">${data.name}</h5>
+                <h6 style="color:white; text-align: center; font-size: 25px; margin: 0; padding: 0;">Manager</h6>
+              </div>
+              <div style="height:70%;">
+                <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">ID: ${data.id}</li>
+                <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Email: ${data.email}</li>
+                <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Office Number:${data.officeNo}</li>
+              </div>
+          </div>`
+      }
+      if (data.getRole() === "Engineer") {
+        return `
+        <div class="card" style="width: 200px; height: 200px; border-style: solid; border-radius: 2%; margin: 5%;">
+        <div class="card-body">
+          <div class="cheader" style="background-color:blue; width: 200px; height: 30%;">
+            <h5 style="color:white; text-align: center; font-size: 35px; margin: 0; padding: 0;">${data.name}</h5>
+            <h6 style="color:white; text-align: center; font-size: 25px; margin: 0; padding: 0;">Manager</h6>
           </div>
-        </div>`
+          <div style="height:70%;">
+            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">ID: ${data.id}</li>
+            <a href="${data.email}" style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Email: ${data.email}</li>
+            <a href="https:/github/${data.github}" style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Github:${data.github}</a>
+          </div>
+      </div>`
+      }
+      if (data.getRole() === "Intern") {
+        return `
+        <div class="card" style="width: 200px; height: 200px; border-style: solid; border-radius: 2%; margin: 5%;">
+        <div class="card-body">
+          <div class="cheader" style="background-color:blue; width: 200px; height: 30%;">
+            <h5 style="color:white; text-align: center; font-size: 35px; margin: 0; padding: 0;">${data.name}</h5>
+            <h6 style="color:white; text-align: center; font-size: 25px; margin: 0; padding: 0;">Manager</h6>
+          </div>
+          <div style="height:70%;">
+            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">ID: ${data.id}</li>
+            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Email: ${data.email}</li>
+            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Office Number:${data.school}</li>
+          </div>
+      </div>`
       }
     });
 }
