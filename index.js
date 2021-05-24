@@ -141,7 +141,7 @@ function generateHTML(employees) {
       <header> 
         <h1>My team</h1>
       </header>
-      <main style="display: flex; height: 85%; width: 100%;>
+      <main style="display: flex; height: 85%; width: 100%;">
         <div class="deck" style="display:flex; justify-content: flex-start; align-items: flex-start; width: 100%; height: 85%;">
           ${generateCard(employees)}
         </div>
@@ -162,8 +162,8 @@ function generateCard(employees){
               </div>
               <div style="height:70%;">
                 <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">ID: ${data.id}</li>
-                <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Email: ${data.email}</li>
-                <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Office Number:${data.officeNo}</li>
+                <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">Email: ${data.email}</li>
+                <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">Office Number:${data.officeNo}</li>
               </div>
           </div>`
       }
@@ -177,8 +177,8 @@ function generateCard(employees){
           </div>
           <div style="height:70%;">
             <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">ID: ${data.id}</li>
-            <a href="${data.email}" style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Email: ${data.email}</li>
-            <a href="https:/github/${data.github}" style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Github:${data.github}</a>
+            <a href="${data.email}" style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">Email: ${data.email}</li>
+            <a href="https:/github/${data.github}" style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">Github:${data.github}</a>
           </div>
       </div>`
       }
@@ -192,8 +192,8 @@ function generateCard(employees){
           </div>
           <div style="height:70%;">
             <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">ID: ${data.id}</li>
-            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Email: ${data.email}</li>
-            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black:">Office Number:${data.school}</li>
+            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">Email: ${data.email}</li>
+            <li style="list-style-type:none; padding: 1%; font-size: 18px; color: black;">Office Number:${data.school}</li>
           </div>
       </div>`
       }
